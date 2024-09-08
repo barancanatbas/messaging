@@ -33,7 +33,7 @@ func NewMessageService(config config.AppConfig, repository interfaces.MessageRep
 		cache:           cache,
 		stopChan:        make(chan bool),
 		deliveryService: deliveryService,
-		messageInterval: time.Duration(config.MessageInterval) * time.Second,
+		messageInterval: time.Duration(config.MessageInterval) * time.Minute,
 	}
 
 	if err := service.StartAutomaticSending(); err != nil {
