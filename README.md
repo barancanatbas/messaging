@@ -49,5 +49,3 @@ http://localhost:8080/swagger/index.html
 ```
 
 This address allows you to explore and test your APIs via Swagger UI.
-
----# messaging
