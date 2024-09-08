@@ -1,0 +1,54 @@
+version: '3'
+
+tasks:
+  tidy:
+    cmds:
+      - go mod tidy
+    desc: Clean up go.mod and go.sum
+
+  build:
+    cmds:
+      - go build -o bin/your-app-name ./cmd/your-app
+    desc: Build the application
+    env:
+      GOOS: linux
+      GOARCH: amd64
+
+  test:
+    cmds:
+      - go test ./...
+    desc: Run tests
+
+  fmt:
+    cmds:
+      - gofmt -s -w .
+    desc: Format code
+
+  install:
+    cmds:
+      - go mod download
+    desc: Install dependencies
+
+  compose-up:
+    cmds:
+      - docker-compose up -d --build
+    desc: Start Docker Compose services
+
+  compose-down:
+    cmds:
+      - docker-compose down
+    desc: Stop and remove Docker Compose services
+
+  compose-logs:
+    cmds:
+      - docker-compose logs -f
+    desc: Tail Docker Compose logs
+
+  swagger:
+    cmds:
+      - go install github.com/swaggo/swag/cmd/swag@latest
+      - export PATH=$PATH:$(go env GOPATH)/bin
+      - echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bashrc
+      - source ~/.bashrc
+      - swag init -g cmd/app/main.go
+    desc: Generate Swagger docs
